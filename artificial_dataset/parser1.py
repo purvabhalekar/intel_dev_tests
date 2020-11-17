@@ -2,11 +2,9 @@ import re
 import pandas as pd
 import os
 
-for i in range(1,11):
-    os.system("python3 makedataset.py %s" %(i*10))
+print('aefhoqifhqoih')
 
-
-with open('infocols.csv') as fd:
+with open('output.csv') as fd:
     data = fd.read()
 
 val_to_pattern = {
@@ -17,11 +15,12 @@ val_to_pattern = {
     'Training Time': r'Training Time = (\-?\d+\.\d+)',
     'Total Time': r'Total Time = (\-?\d+\.\d+)',
 }
-    
+
+pd.set_option("display.max_rows", None, "display.max_columns", None)
 
 val_dict = {}
 for key, patt in val_to_pattern.items():
     val_dict[key] = re.findall(patt, data)
 
 df = pd.DataFrame.from_dict(val_dict)
-print(df)
+print(df.to_string())

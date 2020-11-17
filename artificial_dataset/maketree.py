@@ -9,12 +9,12 @@ from sklearn import metrics
 import timeit
 import sys
 
-d = int(sys.argv[1])
+d = float(sys.argv[1])
 start = timeit.default_timer()
-X, y = make_classification(n_samples = 50, n_features=200, n_redundant=0, n_informative=d, random_state = 0)
+X, y = make_classification(n_samples = 5000000, n_features=200, n_redundant=0, n_informative=20, random_state = 0)
 t3 = timeit.default_timer()
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1) # 70% training and 30% test
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=d, random_state=1) # 70% training and 30% test
 
 clf = DecisionTreeClassifier()
 
@@ -31,10 +31,10 @@ stop = timeit.default_timer()
 
 #print(stop-start)
 
-f = open("infocols.csv", "a") 
+f = open("testsize.csv", "a") 
 
 f.write("Max Depth = "+str(clf.get_depth())+ ", \n")
-f.write("Test size = "+str(0.3)+ ", \n")
+f.write("Test size = "+str(d)+ ", \n")
 f.write("Accuracy = "+str(metrics.accuracy_score(y_test, y_pred))+", \n")
 f.write("Dataset Time = "+str(t3-start)+ ", \n")
 f.write("Training Time = "+str(t2-t1)+", \n")

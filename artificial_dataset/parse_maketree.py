@@ -2,11 +2,11 @@ import re
 import pandas as pd
 import os
 
-for i in range(1,11):
-    os.system("python3 makedataset.py %s" %(i*10))
+for i in range(1,10):
+    os.system("python3 maketree.py %s" %(i/10))
 
 
-with open('infocols.csv') as fd:
+with open('testsize.csv') as fd:
     data = fd.read()
 
 val_to_pattern = {
